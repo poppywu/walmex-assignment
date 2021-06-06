@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 import { useEffect, useState } from "react";
 import client from "../../../../../next_server/apollo-client";
 import Product from "../../../../components/Product";
+import Carousel from '../../../../components/Carousel';
 const GET_ITEM = gql`
   query ItemDetail($id: ID!) {
     item(id: $id) {
@@ -51,6 +52,7 @@ function Detail({ id, username }) {
         category={itemData.category}
         weight={itemData.weight}
       />
+      <Carousel recomData={recomData}/>
     </>
   );
 }
