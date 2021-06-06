@@ -51,18 +51,19 @@ const resolvers = {
                 console.log(`\nusersRecommendedItems > before GET /items?ids=${itemId}\n`);
 
                 // fetch the requested data from the data source
-                const responseFromDataSource = await axios.get(
+                const responseFromDataSource = axios.get(
                     `http://localhost:3000/items?ids=${itemId}`
                 );
 
                 // log point after call
                 console.log(`\nusersRecommendedItems > after GET /items?ids=${itemId}, response => `, responseFromDataSource.data, '\n');
 
-                listOfRecommendedItemsToReturn.push(responseFromDataSource.data[0]);
+                listOfRecommendedItemsToReturn.push(responseFromDataSource);
             }
+            const data=await axios.all(listOfRecommendedItemsToReturn);
 
             // return the data
-            return listOfRecommendedItemsToReturn;
+            return data;
         },
         item: async (parent, args, context, info) => {
             // extract needed arguments
