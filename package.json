@@ -1,0 +1,15 @@
+{
+    "name": "challenge",
+    "version": "1.0.0",
+    "description": "Walmart Mexico Code Challenge",
+    "scripts": {
+        "bootstrap": "lerna bootstrap",
+        "start": "nodemon ./packages/gql_server/src/index.js & nodemon ./packages/microservice/src/index.js & (cd packages/ && cd next_server/ && next start -p 5000)"
+    },
+    "author": "walmex-team",
+    "license": "ISC",
+    "dependencies": {
+        "lerna": "^4.0.0",
+        "nodemon": "^2.0.7"
+    }
+}
