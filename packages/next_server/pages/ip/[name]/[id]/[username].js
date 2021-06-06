@@ -12,6 +12,7 @@ const GET_ITEM = gql`
       department
       category
       weight
+      packagedWeight
     }
   }
 `;
@@ -50,7 +51,7 @@ function Detail({ id, username }) {
         img={itemData.img}
         department={itemData.department}
         category={itemData.category}
-        weight={itemData.weight}
+        weight={itemData.weight?itemData.weight:itemData.packagedWeight}
       />
       <Carousel recomData={recomData}/>
     </>

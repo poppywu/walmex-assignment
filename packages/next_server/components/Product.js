@@ -11,7 +11,7 @@ function Product({name,img,weight,department,category}) {
       <h1>About This Item</h1>
       <h3>Specifications</h3>
       <div className="product__weight">
-        <h2>Weight</h2>
+        <h2>Shipping Weight</h2>
         <p>{weight}</p>
       </div>
       <div className="product__department">
