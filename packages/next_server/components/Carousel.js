@@ -2,8 +2,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from 'next/image';
+import Link from 'next/link';
 
-function Carousel({recomData}) {
+function Carousel({recomData,username}) {
     var settings = {
         dots: false,
         infinite: true,
@@ -16,11 +17,16 @@ function Carousel({recomData}) {
           <Slider {...settings}>
             {recomData.map(data=>{
               return (
+                
                 <div key={data.id}>
+                {/* <Link href={`/ip/${data.img.split(".")[0]}/${data.id}/${username}`}> */}
                  <Image src={`/images/${data.img}`} height={100} width={100}/>
                  <p>{data.name}</p>
                  <p>{data.price}</p>
+                 {/* </Link> */}
                 </div>
+                
+                
               );
             })}
           </Slider>

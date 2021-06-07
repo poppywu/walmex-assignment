@@ -1,7 +1,7 @@
 import client from "../../../../../apollo-client";
 import { gql } from "@apollo/client";
 import Product from "../../../../../components/Product";
-import Link from "next/link";
+import Carousel from "../../../../../components/Carousel";
 //server-side rendering for first time loading
 export const getServerSideProps = async () => {
   const { data: productData } = await client.query({
@@ -14,6 +14,7 @@ export const getServerSideProps = async () => {
           category
           weight
         }
+
       }
     `,
   });
@@ -36,9 +37,10 @@ export const getServerSideProps = async () => {
 };
 export default function Home({ product, recom }) {
   const { name, img, department, category, weight } = product;
-
+  const username="james";
 
   return (
+    
     <div className="container">
       <Product
         name={name}
@@ -47,13 +49,7 @@ export default function Home({ product, recom }) {
         category={category}
         weight={weight}
       />
-      {recom.map((item) => {
-        return (
-          <Link href={`/ip/${item.img.split(".")[0]}/${item.id}/james`}>
-            <div key={item.id}>{item.name}</div>
-          </Link>
-        );
-      })}
+      <Carousel recomData={recom}/>
     </div>
   );
 }

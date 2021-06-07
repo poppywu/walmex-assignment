@@ -16,6 +16,7 @@ const GET_ITEM = gql`
     }
   }
 `;
+
 const GET_USER = gql`
   query UserDetail($username: String!) {
     usersRecommendedItems(username: $username) {
@@ -29,20 +30,20 @@ const GET_USER = gql`
 export default function Username() {
   const router = useRouter();
   const { name, id, username } = router.query;
-
   return <Detail id={id} username={username} />;
 }
 
-function Detail({ id, username }) {
+function Detail({id, username }) {
   const [itemData, setItemData] = useState({});
   const [recomData, setRecomData] = useState([]);
   useEffect(() => {
     client.query({ query: GET_ITEM, variables: { id } }).then((res) => {
-      setItemData(res.data.item);
-    });
-    client.query({ query: GET_USER, variables: { username } }).then((res) => {
-      setRecomData(res.data.usersRecommendedItems);
-    });
+        setItemData(res.data.item);
+      });
+      client.query({ query: GET_USER, variables: { username } }).then((res) => {
+        setRecomData(res.data.usersRecommendedItems);
+      });
+    
   }, []);
   return (
     <>
@@ -53,7 +54,7 @@ function Detail({ id, username }) {
         category={itemData.category}
         weight={itemData.weight?itemData.weight:itemData.packagedWeight}
       />
-      <Carousel recomData={recomData}/>
+      <Carousel recomData={recomData} username={username}/>
     </>
   );
 }
