@@ -1,8 +1,8 @@
-import Image from 'next/image';
-function Product({name,img,weight,department,category}) {
-    return (
-        <div className="product">
-        <div className="product__name">
+import Image from "next/image";
+function Product({ name, img, weight, department, category }) {
+  return (
+    <div className="product">
+      <div className="product__name">
         <h1>{name}</h1>
       </div>
       <div className="product__img">
@@ -22,8 +22,8 @@ function Product({name,img,weight,department,category}) {
         <h2>Category</h2>
         <p>{category}</p>
       </div>
-      </div>
-    )
+    </div>
+  );
 }
 
 export default Product;

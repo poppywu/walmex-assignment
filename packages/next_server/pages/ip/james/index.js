@@ -1,7 +1,7 @@
-import client from "../../../../../apollo-client";
+import client from "../../../apollo-client";
 import { gql } from "@apollo/client";
-import Product from "../../../../../components/Product";
-import Carousel from "../../../../../components/Carousel";
+import Product from "../../../components/Product";
+import Carousel from "../../../components/Carousel";
 //server-side rendering for first time loading
 export const getServerSideProps = async () => {
   const { data: productData } = await client.query({
