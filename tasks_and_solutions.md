@@ -2,7 +2,7 @@
 
 1) Create/code a way to have script commands in the package.json of each server folder (microservice, gql, next.js) that can deploy each server in either a dev, qa, or production environment. If you are not familiar with what "environment" means - it is a dedicated set of servers that developers user to develop in (dev), test with (qa), or deploy to production for your real users (production). Then briefly write the instructions you would give to your dev-ops team on how to use it:
 
-Your instructions: <___TODO-FILL_ME_IN___>
+Your instructions: I add "dev":"cross-env NODE_ENV=development node ./src/index.js" to package.json of gql_server and microservices as development environment; I add "build":"cross-env NODE_ENV=production node ./src/index.js" to package.json of both servers as production environment; For the root file, developers can simply run "npm run dev" for development environment for the whole project, or "npm run build" for the production environment for the whole project.
 
 ---
 
