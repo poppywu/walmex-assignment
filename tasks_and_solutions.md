@@ -40,6 +40,6 @@ Describe your solution: After checking the code in gql_server/src/index.js, I no
 it (ex. '000$'), they can cause the microservice server to crash because the DB cannot handle an invalid item id with $ value. Design and code a solution in any or in all 3 servers (Next.js, gql server, or microservice) to solve this problem. Hint - Try to be DRY from the perspective of all the code that needs to be written in all UIs (web and mobile) and servers to implement this fix. Briefly describe your solution so the QA team understands the fix:
 :
 
-Describe your solution: My common approach for this is to add both client-side validation and server-side validation. 
+Describe your solution: My common approach for this is to add both client-side validation and server-side validation. In microservice/routes/getItemsById.js, I added a server-side validation to check if there is "$" in the id, if so, I will send a response with status code 406. 
 
 ---
