@@ -1,10 +1,10 @@
 import Link from "next/link";
-import React from "react";
 
 function MyLink({ children, username, data }) {
+  const path="/ip/" + data.img.split(".")[0] + "/" + data.id + "/" + username;
   return (
     <Link
-      href={"/ip/" + data.img.split(".")[0] + "/" + data.id + "/" + username}
+      href={path}
     >
       {children}
     </Link>

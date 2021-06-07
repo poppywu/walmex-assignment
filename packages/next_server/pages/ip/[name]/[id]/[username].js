@@ -5,7 +5,7 @@ import client from "../../../../../next_server/apollo-client";
 import Product from "../../../../components/Product";
 import Carousel from "../../../../components/Carousel";
 const GET_ITEM = gql`
-  query ItemDetail($id: ID) {
+  query ItemDetail($id: ID!) {
     item(id: $id) {
       name
       img
@@ -18,7 +18,7 @@ const GET_ITEM = gql`
 `;
 
 const GET_USER = gql`
-  query UserDetail($username: String) {
+  query UserDetail($username: String!) {
     usersRecommendedItems(username: $username) {
       id
       img
@@ -43,7 +43,7 @@ function Detail({ id, username }) {
     client.query({ query: GET_USER, variables: { username } }).then((res) => {
       setRecomData(res.data.usersRecommendedItems);
     });
-  }, []);
+  }, [itemData,recomData]);
   return (
     <>
       <Product

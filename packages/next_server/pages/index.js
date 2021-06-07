@@ -5,7 +5,7 @@ const NotExist = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push('ip/apple_tv/0007/james');
+    router.push('/ip/apple_tv/0007/james');
   }, [])
 
   return (

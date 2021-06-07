@@ -8,13 +8,13 @@ Your instructions: <___TODO-FILL_ME_IN___>
 
 2) Create/code a way to have a single command start up all 3 servers for local development (microservice, gql, next.js). Then briefly write the instructions you would give to a new developer on your team on how to use it:
 
-Your instructions: <___TODO-FILL_ME_IN___>
+Your instructions: With lerna, I am able to start up 3 servers with command "npm run start" in the root file. I change the scripts in package.json of the root file to "start": "lerna run --parallel start". 
 
 ---
 
 3) The dev team you are working on has asked you to make sure this repo's code always looks pretty and easy to read since other developers from all around the world will be writing to it and some will not know what formatting you like in your code (ex. they may use 1 space vs 2 spaces to indent their code). Describe how you will make sure committed code is always formatted consistently and implement the tool or process.
 
-Describe your solution: <___TODO-FILL_ME_IN___>
+Describe your solution: Usually I use third-party code formatting tool. I use the Prettier formatting plugin in VScode for the code formatting. For this project, I also install a package called JS Beautifier/js-beautifier@next for this purpose.
 
 ---
 
@@ -26,13 +26,13 @@ Describe your solution: <___TODO-FILL_ME_IN___>
 
     Implement the code change(s) needed in any of the 3 servers to implement this feature considering that not only the React app, but also iOS and Android mobile UIs for your company will also need to make this UI change as well. Hint - Try to be DRY from the perspective of all the code that needs to be written in all UIs and servers to implement this feature. Briefly describe your solution and why it is good so your product team understands:
 
-Describe your solution: <___TODO-FILL_ME_IN___>
+Describe your solution: For the wording "Shipping Weight", I changed the UI component for rendering that directly. For the data fetching part, I fetched both "weight" and "packaged weight" for all the items. Before rendering the data, I implement a tenary operator to render the non-null data to the "Shipping Weight".
 
 ---
 
 6) The dev-ops team has noticed that calls from the React app to fetch the userRecommendedItems are taking a very long time and it is causing the microservice server to almost crash during peak site usage. Please fix this issue by making changes to either the React app or the graphql server or both to try and reduce this load on the microservice. Briefly describe your solution so the devops team understands:
 
-Describe your solution: <___TODO-FILL_ME_IN___>
+Describe your solution: After checking the code in gql_server/src/index.js, I notice that there is a for-loop with async/await causing this latency.(previously line 43). Since we are sending multiple gets request to the server, I think it's better to push all the requests to an array and use axios.all to resolve all the promise later so that we can proceed in parallel.
 
 ---
 
@@ -40,6 +40,6 @@ Describe your solution: <___TODO-FILL_ME_IN___>
 it (ex. '000$'), they can cause the microservice server to crash because the DB cannot handle an invalid item id with $ value. Design and code a solution in any or in all 3 servers (Next.js, gql server, or microservice) to solve this problem. Hint - Try to be DRY from the perspective of all the code that needs to be written in all UIs (web and mobile) and servers to implement this fix. Briefly describe your solution so the QA team understands the fix:
 :
 
-Describe your solution: <___TODO-FILL_ME_IN___>
+Describe your solution: My common approach for this is to add both client-side validation and server-side validation. 
 
 ---

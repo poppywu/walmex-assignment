@@ -32,53 +32,34 @@ const resolvers = {
         usersRecommendedItems: async (parent , args, context, info) => {
             // extract needed arguments
             const { username } = args;
-
-            // log point before call
-            console.log(`\nusersRecommendedItems > before GET /users/recommendations?username=${username}\n`);
-
             // fetch the requested data from the data source
             const responseFromDataSource = await axios.get(
                 `http://localhost:3000/users/recommendations?username=${username}`
             );
             const listOfRecommendedItemIds = responseFromDataSource.data;
-
-            // log point after call
-            console.log(`\nusersRecommendedItems > after GET /users/recommendations?username=${username}, response => `, listOfRecommendedItemIds, '\n');
-
-            const listOfRecommendedItemsToReturn = [];
+            const listOfRequestsToProceed = [];
             for(const itemId of listOfRecommendedItemIds) {
-                // log point before call
-                console.log(`\nusersRecommendedItems > before GET /items?ids=${itemId}\n`);
-
-                // fetch the requested data from the data source
-                const responseFromDataSource = await axios.get(
+                //set up get request for item
+                const requestFromDataSource = axios.get(
                     `http://localhost:3000/items?ids=${itemId}`
                 );
-
-                // log point after call
-                console.log(`\nusersRecommendedItems > after GET /items?ids=${itemId}, response => `, responseFromDataSource.data, '\n');
-
-                listOfRecommendedItemsToReturn.push(responseFromDataSource.data[0]);
+                //push get request to array
+                listOfRequestsToProceed.push(requestFromDataSource);
             }
-
+            //use axios all for parallel fetching
+            const listOfResponseFromDataSource=await axios.all(listOfRequestsToProceed);
+            //return a list of data for each response
+            const listOfDataFromSource=listOfResponseFromDataSource.map(item=>item.data[0]);
             // return the data
-            return listOfRecommendedItemsToReturn;
+            return listOfDataFromSource;
         },
         item: async (parent, args, context, info) => {
             // extract needed arguments
             const { id } = args;
-
-            // log point before call
-            console.log(`\nitem > before GET /items?ids=${id}\n`);
-
             // fetch the requested data from the data source
             const responseFromDataSource = await axios.get(
                 `http://localhost:3000/items?ids=${id}`
             );
-
-            // log point after call
-            console.log(`\nitem > after GET /items?ids=${id}, response => `, responseFromDataSource.data, '\n');
-
             // return the data
             return responseFromDataSource.data[0];
         }

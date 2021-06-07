@@ -4,7 +4,7 @@ import Product from "../../../components/Product";
 import Carousel from "../../../components/Carousel";
 //server-side rendering for first time loading
 export const getServerSideProps = async () => {
-  const { data: productData } = await client.query({
+  const { data} = await client.query({
     query: gql`
       {
         item(id: "0007") {
@@ -14,12 +14,6 @@ export const getServerSideProps = async () => {
           category
           weight
         }
-      }
-    `,
-  });
-  const { data: recomData } = await client.query({
-    query: gql`
-      {
         usersRecommendedItems(username: "james") {
           id
           img
@@ -29,11 +23,11 @@ export const getServerSideProps = async () => {
       }
     `,
   });
-
+  
   return {
     props: {
-      product: productData.item,
-      recom: recomData.usersRecommendedItems,
+      product: data.item,
+      recom: data.usersRecommendedItems,
     },
   };
 };
